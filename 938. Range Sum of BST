@@ -1,0 +1,28 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+
+/*Just traverse the whole tree using any traversal and check that if current node's value is in between the range then add it to sum*/
+
+class Solution {
+public:
+    int sum=0;
+    void helper(TreeNode* root,int L,int R){
+        if(!root)
+            return;
+        helper(root->left,L,R);
+        if((root->val) >= L && (root->val) <= R)
+            sum = sum + root->val;
+        helper(root->right,L,R);
+    }
+    int rangeSumBST(TreeNode* root, int L, int R) {
+        helper(root,L,R);
+        return sum;
+    }
+};
