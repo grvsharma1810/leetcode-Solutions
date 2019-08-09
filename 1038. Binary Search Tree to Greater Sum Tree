@@ -1,0 +1,28 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+// It uses reverse inorder traversal and maintains a sum variable which keeps track
+// of total sum of elements greater than the current node's value
+
+class Solution {
+public:
+    int sum = 0;
+    void helper(TreeNode* root){
+        if(root==NULL)
+            return;
+        helper(root->right);
+        sum = sum + root->val;
+        root->val = sum;
+        helper(root->left);
+    }
+    TreeNode* bstToGst(TreeNode* root) {
+        helper(root);
+        return root;
+    }    
+};
