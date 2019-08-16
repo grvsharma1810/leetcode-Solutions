@@ -1,0 +1,11 @@
+class Solution {
+public:
+    int numComponents(ListNode* head, vector<int>& G) {
+        int cnt=0;
+        unordered_set<int> S(G.begin(),G.end());
+        for (auto itr=head; itr!=nullptr; itr=itr->next)
+            if (S.count(itr->val) && (itr->next==nullptr || !S.count(itr->next->val)))
+                ++cnt;
+        return cnt;
+    }
+};
